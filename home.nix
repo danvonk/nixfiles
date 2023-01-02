@@ -6,44 +6,85 @@
     }) {
       doomPrivateDir = ./doom.d;  # Directory containing your config.el init.el
     };
-
 in {
-  # Let Home Manager install and manage itself.
+  home.stateVersion = "22.11";
   programs.home-manager.enable = true;
-
-  # Home Manager needs a bit of information about you and the
-  # paths it should manage.
   home.username = "dan";
   home.homeDirectory = "/home/dan";
 
-    home.packages = [
-    pkgs.tmux
-    pkgs.git
-    doom-emacs
-    pkgs.vim
-    pkgs.kitty
-    pkgs.croc
-    pkgs.htop
+  nixpkgs.config.allowUnfree = true;
+
+  home.packages = with pkgs; [
+    tmux
+    git
+    emacs
+    vim
+    kitty
+    croc
+    htop
+    rustup
+    firefox
+    thunderbird
+    gmp
+    xz
+    spotify
+    vscode
+    zsh
   ];
 
+  programs.zsh = {
+    enable = true;
+    oh-my-zsh = {
+      enable = true;
+      plugins = ["git"];
+      theme = "robbyrussell";
+    };
+  };
   programs.git = {
     enable = true;
-    userName = "Dan Vonk";
-    userEmail = "dan@danvonk.com";
+
+    userName = "Daniel Vonk";
+    userEmail = "daniel.vonk@kdab.com";
+    extraConfig = {
+      rerere = {
+       enabled = true;
+       autoupdate = true; 
+      };
+      core = {
+        pager = "less -FRSX";
+        autocrlf = "input";
+      };
+      color = {
+        ui = "auto";
+      };
+      "url \"ssh:\/\/git@code.siemens-energy.com/\"".insteadOf
+        = "https:\/\/code.siemens-energy.com";
+    };
+  };
+  programs.ssh = {
+    matchBlocks = {
+      kdab = {
+        hostname = "kdab.com";
+        identityFile = "~/.ssh/id_kdab";
+        identitiesOnly = "yes";
+      };
+      codereview = {
+        hostname = "codereview.kdab.com";
+        port = 29418;
+        identityFile = "~/.ssh/id_kdab";
+        identitiesOnly = "yes";
+        preferredAuthentications = "publickey";
+        pubkeyAcceptedKeyTypes = "+ssh-ed25519";
+      };
+   };
   };
   services.emacs = {
-    enable = true;
+    enable = false;
     package = doom-emacs;
   };
-
-
-
-
-
-
-
-
-
-  home.stateVersion = "22.11";
+  gtk = {
+    enable = true;
+    theme.name = "Arc-Dark";
+  };
 }
 
