@@ -2,8 +2,9 @@
   inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.05";
   inputs.home-manager.url = "github:nix-community/home-manager/release-23.05";
   inputs.home-manager.inputs.nixpkgs.follows = "nixpkgs";
+  inputs.nix-doom-emacs.url = "github:nix-community/nix-doom-emacs";
 
-  outputs = { self, nixpkgs, home-manager }@inputs: {
+  outputs = { self, nixpkgs, home-manager, nix-doom-emacs }@inputs: {
 
     # Just one nixos setup for now
     nixosConfigurations = {

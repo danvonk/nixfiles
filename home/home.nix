@@ -1,6 +1,7 @@
 { inputs, config, pkgs, ... }:
 {
   imports = [
+    inputs.nix-doom-emacs.hmModule
   ];
 
   home = {
@@ -12,7 +13,6 @@
     home.stateVersion = "23.05";
     programs.home-manager.enable = true;
     home.packages = with pkgs; [
-      emacs
       vim
       git
       htop
@@ -21,6 +21,7 @@
       zsh
       rofi
       direnv
+      kitty
     ];
     programs.zsh = {
       enable = true;
@@ -30,8 +31,11 @@
         theme = "robbyrussell";
       };
     };
-    services.emacs = {
+
+    programs.doom-emacs = {
       enable = true;
+      doomPrivateDir = ./doom.d; # Directory containing your config.el, init.el
+                                 # and packages.el files
     };
 
     home.file.".config/kitty/kitty.conf".source = config.lib.file.mkOutOfStoreSymlink ./dotfiles/kitty/kitty.conf;
