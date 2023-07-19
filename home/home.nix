@@ -12,6 +12,9 @@
     /* The home.stateVersion option does not have a default and must be set */
     home.stateVersion = "23.05";
     programs.home-manager.enable = true;
+    
+    fonts.fontconfig.enable = true;
+
     home.packages = with pkgs; [
       vim
       git
@@ -22,7 +25,10 @@
       rofi
       direnv
       kitty
+      jetbrains-mono
+      noto-fonts
     ];
+
     programs.zsh = {
       enable = true;
       oh-my-zsh = {
