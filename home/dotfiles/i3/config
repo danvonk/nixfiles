@@ -140,12 +140,12 @@ bindsym $super+r mode "resize"
 
 for_window [class=".*"] border pixel 3 # border (no color)
 
-assign [class=Firefox|Chromium] 1
-assign [class=Code] 2 # programming workspace
-assign [class=Geany|Thunderbird|MineTime|Gucharmap|Soffice|libreoffice*] 3
-assign [class=Signal|Spotify] 4
-assign [class=Audacity|Vlc|mpv|Ghb|Xfburn|Gimp*|Inkscape] 5
-assign [class=Lxappearance|System-config-printer.py|Lxtask|GParted|Pavucontrol|Exo-helper*|Lxrandr|Arandr] 6
+# assign [class=Firefox|Chromium] 1
+# assign [class=Code] 2 # programming workspace
+# assign [class=Geany|Thunderbird|MineTime|Gucharmap|Soffice|libreoffice*] 3
+# assign [class=Signal|Spotify] 4
+# assign [class=Audacity|Vlc|mpv|Ghb|Xfburn|Gimp*|Inkscape] 5
+# assign [class=Lxappearance|System-config-printer.py|Lxtask|GParted|Exo-helper*|Lxrandr|Arandr] 6
 
 for_window [class=Viewnior|feh|Audacious|File-roller|Lxappearance|Lxtask|Pavucontrol|Nautilus] floating enable
 for_window [class=URxvt|Firefox|Geany|Evince|Soffice|libreoffice*|mpv|Ghb|Xfburn|Gimp*|Inkscape|Vlc|Lxappearance|Audacity|Thunar|xfce4-terminal|kitty] focus

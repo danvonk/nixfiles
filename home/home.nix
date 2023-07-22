@@ -27,6 +27,11 @@
       kitty
       jetbrains-mono
       noto-fonts
+      xfce.xfce4-whiskermenu-plugin
+      ispell
+      hunspell
+      hunspellDicts.en-gb-large
+      pavucontrol
     ];
 
     programs.zsh = {
