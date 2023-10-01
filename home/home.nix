@@ -67,6 +67,10 @@
                                  # and packages.el files
     };
 
+    programs.texlive = {
+      enable = true;
+    };
+
     home.file.".config/kitty/kitty.conf".source = config.lib.file.mkOutOfStoreSymlink ./dotfiles/kitty/kitty.conf;
     home.file.".config/i3/config".source = config.lib.file.mkOutOfStoreSymlink ./dotfiles/i3/config;
 }
