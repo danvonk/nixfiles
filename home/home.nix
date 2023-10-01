@@ -40,11 +40,23 @@
       pavucontrol
     ];
 
+    home.sessionVariables = {
+      EDITOR = "emacs -nw";
+    };
+
+    home.shellAliases = {
+      nupdate = "cd ~/nixfiles && sudo nixos-rebuild switch --upgrade --flake .#desktop";
+      hupdate = "cd ~/nixfiles && home-manager switch --flake .#dan@desktop";
+    };
+
     programs.zsh = {
       enable = true;
       oh-my-zsh = {
         enable = true;
-        plugins = ["git"];
+        plugins = ["git"
+                   "zsh-autosuggestions"
+                   "zsh-syntax-highlighting"
+                  ];
         theme = "robbyrussell";
       };
     };
