@@ -21,7 +21,7 @@
   networking.networkmanager.enable = true;
 
   # Set your time zone.
-  time.timeZone = "Europe/London";
+  time.timeZone = "Europe/Berlin";
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_GB.UTF-8";
@@ -66,6 +66,9 @@
     # Enable the nvidia settings menu
     nvidiaSettings = true;
 
+    powerManagement.enable = false;
+    powerManagement.finegrained = false;
+
     # Optionally, you may need to select the appropriate driver version for your specific GPU.
     package = config.boot.kernelPackages.nvidiaPackages.stable;
   };
@@ -74,15 +77,17 @@
   services.xserver = {
     enable = true;
     desktopManager = {
-      xfce = {
-        enable = true;
-        noDesktop = true;
-        enableXfwm = false;
-      };
+       xfce = {
+         enable = true;
+         noDesktop = true;
+         enableXfwm = false;
+       };
+      gnome.enable = true;
     };
     displayManager = {
-      defaultSession = "xfce+i3";
-      lightdm.enable = true;
+      defaultSession = "gnome";
+      # lightdm.enable = true;
+      gdm.enable = true;
     };
     windowManager.i3.enable = true;
   };
@@ -91,12 +96,12 @@
 
   # Configure keymap in X11
   services.xserver = {
-    layout = "us";
+    layout = "gb";
     xkbVariant = "";
   };
 
   # Configure console keymap
-  console.keyMap = "us";
+  console.keyMap = "uk";
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
@@ -143,12 +148,12 @@
 
   services.flatpak.enable = true;
   services.dbus.enable = true;
-  xdg.portal = {
-    enable = true;
-    wlr.enable = true;
-    # gtk portal needed to make gtk apps happy
-    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
-  };
+  # xdg.portal = {
+  #   enable = true;
+  #   wlr.enable = true;
+  #   # gtk portal needed to make gtk apps happy
+  #   extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+  # };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
