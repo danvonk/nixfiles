@@ -15,6 +15,12 @@
     
     fonts.fontconfig.enable = true;
 
+    dconf.settings = {
+      "org/gnome/mutter" = {
+        experimental-features = [ "scale-monitor-framebuffer" ];
+      };
+    };
+
     home.packages = with pkgs; [
       vim
       git
