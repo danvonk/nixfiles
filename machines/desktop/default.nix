@@ -86,7 +86,6 @@
     };
     displayManager = {
       defaultSession = "gnome";
-      # lightdm.enable = true;
       gdm.enable = true;
     };
     windowManager.i3.enable = true;
@@ -146,8 +145,11 @@
 
   programs.zsh.enable = true;
 
-  services.flatpak.enable = true;
-  services.dbus.enable = true;
+  services = {
+    flatpak.enable = true;
+    dbus.enable = true;
+  };
+
   # xdg.portal = {
   #   enable = true;
   #   wlr.enable = true;
