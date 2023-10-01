@@ -141,7 +141,7 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     vim
-  #  wget
+    curl
   ];
 
   programs.zsh.enable = true;

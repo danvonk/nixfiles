@@ -13,7 +13,7 @@
         specialArgs = { inherit inputs; };
         modules =
           [
-            ./desktop/configuration.nix
+            ./machines/desktop/default.nix
           ];
       };
     };
