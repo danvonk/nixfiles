@@ -16,6 +16,15 @@
             ./machines/desktop/default.nix
           ];
       };
+      nixps = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = { inherit inputs; };
+        modules =
+          [
+            ./machines/nixps/default.nix
+          ];
+      };
+
     };
     #  Home Manager config for dan@desktop
     homeConfigurations = {

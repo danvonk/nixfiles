@@ -2,6 +2,7 @@
 {
   imports = [
     inputs.nix-doom-emacs.hmModule
+    ./git.nix
   ];
 
   home = {
@@ -38,6 +39,8 @@
       hunspell
       hunspellDicts.en-gb-large
       pavucontrol
+      syncthing
+      nix-direnv
     ];
 
     home.sessionVariables = {
@@ -45,7 +48,7 @@
     };
 
     home.shellAliases = {
-      nupdate = "cd ~/nixfiles && sudo nixos-rebuild switch --upgrade --flake .#desktop";
+      nupdate = "cd ~/nixfiles && sudo nixos-rebuild switch --upgrade --flake";
       hupdate = "cd ~/nixfiles && home-manager switch --flake .#dan@desktop";
     };
 
@@ -70,6 +73,11 @@
 
     programs.texlive = {
       enable = true;
+    };
+
+    services.syncthing = {
+      enable = true;
+      tray.enable = true;
     };
 
     home.file.".config/kitty/kitty.conf".source = config.lib.file.mkOutOfStoreSymlink ./dotfiles/kitty/kitty.conf;

@@ -2,20 +2,43 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ inputs, config, lib, pkgs, ... }:
+{ inputs, lib, config, pkgs, ... }:
 
 {
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
       ../nix.nix
+      ../../modules/nvidia.nix
     ];
+
+  modules.nvidia.enable = true;
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  boot.kernelParams = [ "psmouse.synaptics_intertouch=0" ];
 
-  networking.hostName = "nixos"; # Define your hostname.
+  networking.hostName = "nixps"; # Define your hostname.
+  networking.domain = "local";
+
+  services.avahi = {
+    enable = true;
+    nssmdns = true;
+    publish = {
+      enable = true;
+      addresses = true;
+      domain = true;
+      hinfo = true;
+      userServices = true;
+      workstation = true;
+    };
+  };
+  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+
+  # Configure network proxy if necessary
+  # networking.proxy.default = "http://user:password@proxy:port/";
+  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
   # Enable networking
   networking.networkmanager.enable = true;
@@ -38,44 +61,19 @@
     LC_TIME = "en_GB.UTF-8";
   };
 
-  hardware.opengl = {
-    enable = true;
-    driSupport = true;
-    driSupport32Bit = true;
-  };
-
-  # NVIDIA drivers are unfree.
-  nixpkgs.config.allowUnfreePredicate = pkg:
-    builtins.elem (lib.getName pkg) [
-      "nvidia-x11"
-      "nvidia-settings"
-    ];
-
-  # Tell Xorg to use the nvidia driver
-  services.xserver.videoDrivers = ["nvidia"];
-
-  hardware.nvidia = {
-
-    # Modesetting is needed for most wayland compositors
-    modesetting.enable = true;
-
-    # Use the open source version of the kernel module
-    # Only available on driver 515.43.04+
-    open = true;
-
-    # Enable the nvidia settings menu
-    nvidiaSettings = true;
-
-    powerManagement.enable = false;
-    powerManagement.finegrained = false;
-
-    # Optionally, you may need to select the appropriate driver version for your specific GPU.
-    package = config.boot.kernelPackages.nvidiaPackages.stable;
-  };
-
-  # Enable the X11 windowing system.
+  # Enable the GNOME Desktop Environment.
   services.xserver = {
     enable = true;
+    exportConfiguration = true;
+    synaptics.enable = false;
+    libinput = {
+      enable = true;
+      touchpad.tapping = true;
+      touchpad.naturalScrolling = false;
+      touchpad.scrollMethod = "twofinger";
+      touchpad.disableWhileTyping = false;
+      touchpad.clickMethod = "clickfinger";
+    };
     desktopManager = {
        xfce = {
          enable = true;
@@ -90,8 +88,6 @@
     };
     windowManager.i3.enable = true;
   };
-
-  # Enable the XFCE Desktop Environment.
 
   # Configure keymap in X11
   services.xserver = {
@@ -139,8 +135,9 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    vim
+    vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     curl
+    tailscale
   ];
 
   programs.zsh.enable = true;
@@ -150,12 +147,8 @@
     dbus.enable = true;
   };
 
-  # xdg.portal = {
-  #   enable = true;
-  #   wlr.enable = true;
-  #   # gtk portal needed to make gtk apps happy
-  #   extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
-  # };
+  services.tailscale.enable = true;
+
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
