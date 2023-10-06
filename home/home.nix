@@ -30,7 +30,6 @@
       thunderbird
       zsh
       rofi
-      direnv
       kitty
       jetbrains-mono
       noto-fonts
@@ -40,11 +39,14 @@
       hunspellDicts.en-gb-large
       pavucontrol
       syncthing
+      direnv
       nix-direnv
+      ripgrep
     ];
 
     home.sessionVariables = {
-      EDITOR = "emacs -nw";
+      EDITOR = "emacsclient -nw";
+      NIXPKGS_ALLOW_BROKEN = 1;
     };
 
     home.shellAliases = {
@@ -57,9 +59,8 @@
       enableCompletion = true;
       oh-my-zsh = {
         enable = true;
-        plugins = ["git"
-                   "zsh-autosuggestions"
-                   "zsh-syntax-highlighting"
+        plugins = [
+          "git"
                   ];
         theme = "robbyrussell";
       };
@@ -71,8 +72,10 @@
                                  # and packages.el files
     };
 
-    programs.texlive = {
+    programs.direnv = {
       enable = true;
+      nix-direnv.enable = true;
+      enableZshIntegration = true;
     };
 
     services.syncthing = {
