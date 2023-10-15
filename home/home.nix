@@ -16,11 +16,11 @@
     
     fonts.fontconfig.enable = true;
 
-    dconf.settings = {
-      "org/gnome/mutter" = {
-        experimental-features = [ "scale-monitor-framebuffer" ];
-      };
-    };
+    # dconf.settings = {
+    #   "org/gnome/mutter" = {
+    #     experimental-features = [ "scale-monitor-framebuffer" ];
+    #   };
+    # };
 
     home.packages = with pkgs; [
       vim
@@ -41,7 +41,11 @@
       syncthing
       direnv
       nix-direnv
+      nixfmt
       ripgrep
+      libreoffice-qt
+      texlive.combined.scheme-full
+      isabelle
     ];
 
     home.sessionVariables = {
@@ -50,7 +54,7 @@
     };
 
     home.shellAliases = {
-      nupdate = "cd ~/nixfiles && sudo nixos-rebuild switch --upgrade --flake";
+      nupdate = "cd ~/nixfiles && sudo nixos-rebuild switch --upgrade --flake && cd -";
       hupdate = "cd ~/nixfiles && home-manager switch --flake .#dan@desktop";
     };
 
@@ -76,6 +80,7 @@
       enable = true;
       nix-direnv.enable = true;
       enableZshIntegration = true;
+      enableBashIntegration = true;
     };
 
     services.syncthing = {
