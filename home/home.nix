@@ -30,6 +30,7 @@
       thunderbird
       zsh
       rofi
+      ripgrep
       kitty
       jetbrains-mono
       noto-fonts
@@ -44,6 +45,7 @@
       nixfmt
       ripgrep
       libreoffice-qt
+      foliate
       texlive.combined.scheme-full
       isabelle
     ];
@@ -54,8 +56,8 @@
     };
 
     home.shellAliases = {
-      nupdate = "cd ~/nixfiles && sudo nixos-rebuild switch --upgrade --flake && cd -";
-      hupdate = "cd ~/nixfiles && home-manager switch --flake .#dan@desktop";
+      nupdate = "cd ~/nixfiles && sudo nixos-rebuild switch --upgrade --flake";
+      hupdate = "cd ~/nixfiles && home-manager switch --flake .#dan@desktop && cd -";
     };
 
     programs.zsh = {
