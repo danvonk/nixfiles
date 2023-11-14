@@ -16,11 +16,11 @@
     
     fonts.fontconfig.enable = true;
 
-    # dconf.settings = {
-    #   "org/gnome/mutter" = {
-    #     experimental-features = [ "scale-monitor-framebuffer" ];
-    #   };
-    # };
+     dconf.settings = {
+       "org/gnome/mutter" = {
+         experimental-features = [];
+       };
+     };
 
     home.packages = with pkgs; [
       vim
@@ -48,6 +48,7 @@
       foliate
       texlive.combined.scheme-full
       isabelle
+      gdb
     ];
 
     home.sessionVariables = {
