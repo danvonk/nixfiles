@@ -19,8 +19,10 @@
 ;;
 ;; They all accept either a font-spec, font string ("Input Mono-12"), or xlfd
 ;; font string. You generally only need these two:
-(setq doom-font (font-spec :family "JetBrains Mono" :size 14 :weight 'medium)
-      doom-variable-pitch-font (font-spec :family "Noto Serif" :size 16 :weight 'regular))
+(setq doom-font (font-spec :family "JetBrains Mono" :size 15 :weight 'medium)
+      doom-variable-pitch-font (font-spec :family "Noto Serif" :size 32 :weight 'regular))
+
+;; (setq doom-big-font (font-spec :family "JetBrains Mono" :size 24 :weight 'medium))
 
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
@@ -101,3 +103,6 @@
 (use-package! tree-sitter)
 (require 'tree-sitter-langs)
 (global-tree-sitter-mode)
+
+(provide 'config)
+;;;
