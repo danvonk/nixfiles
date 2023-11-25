@@ -12,12 +12,15 @@
       ../../modules/nvidia.nix
     ];
 
+  # Custom module toggles
   modules.nvidia.enable = true;
 
   # Bootloader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-  boot.kernelParams = [ "psmouse.synaptics_intertouch=0" ];
+  boot = {
+    loader.systemd-boot.enable = true;
+    loader.efi.canTouchEfiVariables = true;
+    kernelParams = [ "psmouse.synaptics_intertouch=0" ];
+  };
 
   networking.hostName = "nixps"; # Define your hostname.
   networking.domain = "local";
@@ -138,6 +141,7 @@
     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     curl
     tailscale
+    xdg-utils
   ];
 
   programs.zsh.enable = true;
