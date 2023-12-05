@@ -5,12 +5,11 @@
 { inputs, lib, config, pkgs, ... }:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      ../nix.nix
-      ../../modules/nvidia.nix
-    ];
+  imports = [ # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+    ../nix.nix
+    ../modules/nvidia.nix
+  ];
 
   # Custom module toggles
   modules.nvidia.enable = true;
