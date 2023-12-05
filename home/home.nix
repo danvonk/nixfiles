@@ -16,8 +16,11 @@
   programs.home-manager.enable = true;
 
   fonts.fontconfig.enable = true;
-
-  dconf.settings = { "org/gnome/mutter" = { experimental-features = [ ]; }; };
+  dconf.settings = {
+    "org/gnome/mutter" = {
+      experimental-features = [ "scale-monitor-framebuffer" ];
+    };
+  };
 
   home.packages = with pkgs; [
     vim
@@ -49,6 +52,8 @@
     vscode
     ghc # having ghci in shell is useful
     agda
+    chromium
+    gnome.pomodoro
   ];
 
   home.sessionVariables = {
@@ -72,10 +77,11 @@
     };
   };
 
+  services.emacs.enable = true;
   programs.doom-emacs = {
     enable = true;
-    doomPrivateDir = ./doom.d; # Directory containing your config.el, init.el
-    # and packages.el files
+    doomPrivateDir = ./doom.d;
+    emacsPackage = pkgs.emacs-gtk;
   };
 
   programs.direnv = {
