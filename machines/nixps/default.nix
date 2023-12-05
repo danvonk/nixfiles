@@ -77,11 +77,11 @@
       touchpad.clickMethod = "clickfinger";
     };
     desktopManager = {
-       xfce = {
-         enable = true;
-         noDesktop = true;
-         enableXfwm = false;
-       };
+      xfce = {
+        enable = true;
+        noDesktop = true;
+        enableXfwm = false;
+      };
       gnome.enable = true;
     };
     displayManager = {
@@ -127,7 +127,7 @@
   users.users.dan = {
     isNormalUser = true;
     description = "Dan Vonk";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "docker" ];
     shell = pkgs.zsh;
   };
 
@@ -141,7 +141,12 @@
     curl
     tailscale
     xdg-utils
+    gnomeExtensions.appindicator
+    gnomeExtensions.pop-shell
+    gnomeExtensions.pop-launcher-super-key
   ];
+
+  services.udev.packages = with pkgs; [ gnome.gnome-settings-daemon ];
 
   programs.zsh.enable = true;
 
@@ -151,7 +156,7 @@
   };
 
   services.tailscale.enable = true;
-
+  virtualisation.docker.enable = true;
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
