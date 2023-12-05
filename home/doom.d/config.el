@@ -19,7 +19,7 @@
 ;;
 ;; They all accept either a font-spec, font string ("Input Mono-12"), or xlfd
 ;; font string. You generally only need these two:
-(setq doom-font (font-spec :family "JetBrains Mono" :size 15 :weight 'medium)
+(setq doom-font (font-spec :family "JetBrains Mono" :size 15 :weight 'regular)
       doom-variable-pitch-font (font-spec :family "Noto Serif" :size 32 :weight 'regular))
 
 ;; (setq doom-big-font (font-spec :family "JetBrains Mono" :size 24 :weight 'medium))
@@ -96,13 +96,13 @@
 (setq lsp-clients-clangd-args
     '("--header-insertion=never"))
 ;; (add-hook 'c-mode-hook (lambda () (clang-format-save-hook-for-this-buffer)))
-;; (add-hook 'c++-mode-hook (lambda () (clang-format-save-hook-for-this-buffer)))
+(add-hook 'c++-mode-hook (lambda () (clang-format-save-hook-for-this-buffer)))
 ;; (add-hook 'glsl-mode-hook (lambda () (clang-format-save-hook-for-this-buffer)))
 
 ;; tree sitter for emacs28
-(use-package! tree-sitter)
-(require 'tree-sitter-langs)
-(global-tree-sitter-mode)
+;; (use-package! tree-sitter)
+;; (require 'tree-sitter-langs)
+;; (global-tree-sitter-mode)
 
 (provide 'config)
 ;;;
