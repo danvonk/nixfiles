@@ -1,11 +1,6 @@
 { inputs, config, pkgs, lib, ... }: {
   imports = [ inputs.nix-doom-emacs.hmModule ./git.nix ];
 
-  nixpkgs.config = {
-    allowUnfree = true;
-    allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [ "vscode" ];
-  };
-
   home = {
     username = "dan";
     homeDirectory = "/home/dan";
@@ -16,10 +11,15 @@
   programs.home-manager.enable = true;
 
   fonts.fontconfig.enable = true;
-  dconf.settings = {
-    "org/gnome/mutter" = {
-      experimental-features = [ "scale-monitor-framebuffer" ];
-    };
+  # dconf.settings = {
+  #   "org/gnome/mutter" = {
+  #     experimental-features = [ "scale-monitor-framebuffer" ];
+  #   };
+  # };
+
+  nixpkgs.config = {
+    allowUnfree = true;
+    allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [ "vscode" ];
   };
 
   home.packages = with pkgs; [
@@ -47,13 +47,14 @@
     libreoffice-qt
     foliate
     texlive.combined.scheme-full
-    isabelle
+    # isabelle
     gdb
     vscode
     ghc # having ghci in shell is useful
-    agda
     chromium
     gnome.pomodoro
+    fzf
+    cachix
   ];
 
   home.sessionVariables = {
@@ -62,7 +63,8 @@
   };
 
   home.shellAliases = {
-    nupdate = "cd ~/nixfiles && sudo nixos-rebuild switch --upgrade --flake";
+    nupdate =
+      "cd ~/nixfiles && sudo nixos-rebuild switch --upgrade --flake && cd -";
     hupdate =
       "cd ~/nixfiles && home-manager switch --flake .#dan@desktop && cd -";
   };
@@ -72,7 +74,7 @@
     enableCompletion = true;
     oh-my-zsh = {
       enable = true;
-      plugins = [ "git" ];
+      plugins = [ "git" "fzf" ];
       theme = "robbyrussell";
     };
   };
@@ -81,7 +83,7 @@
   programs.doom-emacs = {
     enable = true;
     doomPrivateDir = ./doom.d;
-    emacsPackage = pkgs.emacs-gtk;
+    emacsPackage = pkgs.emacs;
   };
 
   programs.direnv = {
