@@ -125,6 +125,7 @@
     curl
     tailscale
     xdg-utils
+    cachix
     gnomeExtensions.appindicator
     gnomeExtensions.pop-shell
     gnomeExtensions.pop-launcher-super-key
