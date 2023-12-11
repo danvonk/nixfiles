@@ -19,7 +19,7 @@ in {
     users.users.dan = {
       isNormalUser = true;
       description = "Dan Vonk";
-      extraGroups = [ "networkmanager" "wheel" ];
+      extraGroups = [ "networkmanager" "wheel" "docker" ];
       shell = pkgs.zsh;
     };
 
