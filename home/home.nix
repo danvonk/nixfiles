@@ -28,10 +28,8 @@
     htop
     firefox
     thunderbird
-    zsh
     rofi
-    ripgrep
-    kitty
+    # kitty
     jetbrains-mono
     noto-fonts
     xfce.xfce4-whiskermenu-plugin
@@ -53,8 +51,14 @@
     ghc # having ghci in shell is useful
     chromium
     gnome.pomodoro
+    # emacs
+    ripgrep
+    # shell gizmos
+    # zsh
     fzf
-    cachix
+    zsh-autosuggestions
+    zsh-autocomplete
+    zsh-syntax-highlighting
   ];
 
   home.sessionVariables = {
@@ -67,6 +71,7 @@
       "cd ~/nixfiles && sudo nixos-rebuild switch --upgrade --flake && cd -";
     hupdate =
       "cd ~/nixfiles && home-manager switch --flake .#dan@desktop && cd -";
+    ec = "emacsclient -nw";
   };
 
   programs.zsh = {
@@ -74,7 +79,13 @@
     enableCompletion = true;
     oh-my-zsh = {
       enable = true;
-      plugins = [ "git" "fzf" ];
+      plugins = [
+        "git"
+        "fzf"
+        "zsh-autosuggestions"
+        "zsh-syntax-highlighting"
+        "zsh-autocomplete"
+      ];
       theme = "robbyrussell";
     };
   };
