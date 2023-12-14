@@ -10,12 +10,15 @@
     ../nix.nix
     ../modules/nvidia.nix
     ../modules/locale.nix
+    ../modules/networking.nix
   ];
 
   # Custom module toggles
   modules.nvidia.enable = true;
   modules.locale.enable = true;
+  modules.user.enable = true;
 
+  # laptop-specific nvidia config
   hardware.nvidia.prime = {
     offload = {
       enable = true;
@@ -32,29 +35,10 @@
     kernelParams = [ "psmouse.synaptics_intertouch=0" ];
   };
 
-  networking.hostName = "nixps"; # Define your hostname.
-  networking.domain = "local";
-
-  services.avahi = {
+  modules.networking = {
     enable = true;
-    nssmdns = true;
-    publish = {
-      enable = true;
-      addresses = true;
-      domain = true;
-      hinfo = true;
-      userServices = true;
-      workstation = true;
-    };
+    hostname = "nixps";
   };
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
-  # Enable networking
-  networking.networkmanager.enable = true;
 
   # Enable the GNOME Desktop Environment.
   services.xserver = {
@@ -104,17 +88,6 @@
     #media-session.enable = true;
   };
 
-  # Enable touchpad support (enabled default in most desktopManager).
-  # services.xserver.libinput.enable = true;
-
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.dan = {
-    isNormalUser = true;
-    description = "Dan Vonk";
-    extraGroups = [ "networkmanager" "wheel" "docker" ];
-    shell = pkgs.zsh;
-  };
-
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
@@ -133,7 +106,12 @@
 
   services.udev.packages = with pkgs; [ gnome.gnome-settings-daemon ];
 
-  programs.zsh.enable = true;
+  programs.zsh = {
+    enable = true;
+    autosuggestions.enable = true;
+    synyaxHighlighting.enable = true;
+    autocomplete.enable = true;
+  };
 
   services = {
     flatpak.enable = true;
@@ -141,9 +119,11 @@
   };
 
   services.tailscale.enable = true;
-  virtualisation.docker = {
-    enable = true;
-    enableNvidia = true;
+  virtualisation = {
+    docker = {
+      enable = true;
+      enableNvidia = true;
+    };
   };
 
   # Some programs need SUID wrappers, can be configured further or are
