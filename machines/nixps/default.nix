@@ -106,12 +106,7 @@
 
   services.udev.packages = with pkgs; [ gnome.gnome-settings-daemon ];
 
-  programs.zsh = {
-    enable = true;
-    autosuggestions.enable = true;
-    synyaxHighlighting.enable = true;
-    autocomplete.enable = true;
-  };
+  programs.zsh.enable = true;
 
   services = {
     flatpak.enable = true;
