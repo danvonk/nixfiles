@@ -18,7 +18,6 @@
         specialArgs = { inherit inputs; };
         modules = [ ./machines/nixps/default.nix ];
       };
-
     };
     #  Home Manager config for dan@desktop
     homeConfigurations = {
