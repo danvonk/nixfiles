@@ -76,16 +76,13 @@
 
   programs.zsh = {
     enable = true;
+    syntaxHighlighting.enable = true;
+    enableAutosuggestions = true;
     enableCompletion = true;
+    enableVteIntegration = true;
     oh-my-zsh = {
       enable = true;
-      plugins = [
-        "git"
-        "fzf"
-        "zsh-autosuggestions"
-        "zsh-syntax-highlighting"
-        "zsh-autocomplete"
-      ];
+      plugins = [ "git" "fzf" "sudo" "docker" ];
       theme = "robbyrussell";
     };
   };
@@ -102,6 +99,11 @@
     nix-direnv.enable = true;
     enableZshIntegration = true;
     enableBashIntegration = true;
+  };
+
+  programs.neovim = {
+    enable = true;
+    defaultEditor = false;
   };
 
   services.syncthing = {
