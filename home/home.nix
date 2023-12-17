@@ -1,5 +1,5 @@
 { inputs, config, pkgs, lib, ... }: {
-  imports = [ inputs.nix-doom-emacs.hmModule ./git.nix ];
+  imports = [ ./git.nix ];
 
   home = {
     username = "dan";
@@ -51,14 +51,11 @@
     ghc # having ghci in shell is useful
     chromium
     gnome.pomodoro
+    sqlite
     # emacs
     ripgrep
     # shell gizmos
-    # zsh
     fzf
-    zsh-autosuggestions
-    zsh-autocomplete
-    zsh-syntax-highlighting
   ];
 
   home.sessionVariables = {
@@ -80,18 +77,21 @@
     enableAutosuggestions = true;
     enableCompletion = true;
     enableVteIntegration = true;
+    prezto = {
+      enable = false;
+      extraModules = [ "git" ];
+    };
     oh-my-zsh = {
       enable = true;
-      plugins = [ "git" "fzf" "sudo" "docker" ];
+      plugins = [ "git" "fzf" "sudo" "docker" "pyenv" "python" "ripgrep" ];
       theme = "robbyrussell";
     };
   };
 
   services.emacs.enable = true;
-  programs.doom-emacs = {
+  programs.emacs = {
     enable = true;
-    doomPrivateDir = ./doom.d;
-    emacsPackage = pkgs.emacs;
+    package = pkgs.emacs29-pgtk;
   };
 
   programs.direnv = {
@@ -104,12 +104,18 @@
   programs.neovim = {
     enable = true;
     defaultEditor = false;
+    plugins = [
+      pkgs.vimPlugins.nvim-treesitter
+      pkgs.vimPlugins.nvim-treesitter.withAllGrammars
+    ];
   };
 
   services.syncthing = {
     enable = true;
     tray.enable = true;
   };
+
+  home.file.".config/doom".source = ./doom.d;
 
   home.file.".config/kitty/kitty.conf".source =
     config.lib.file.mkOutOfStoreSymlink ./dotfiles/kitty/kitty.conf;
