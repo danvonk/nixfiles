@@ -20,14 +20,14 @@
 ;; They all accept either a font-spec, font string ("Input Mono-12"), or xlfd
 ;; font string. You generally only need these two:
 (setq doom-font (font-spec :family "JetBrains Mono" :size 15 :weight 'regular)
-      doom-variable-pitch-font (font-spec :family "Noto Serif" :size 32 :weight 'regular))
+      doom-variable-pitch-font (font-spec :family "Noto Serif" :size 15 :weight 'regular))
 
 ;; (setq doom-big-font (font-spec :family "JetBrains Mono" :size 24 :weight 'medium))
 
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'dichromacy)
+(setq doom-theme 'doom-one)
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
@@ -59,18 +59,18 @@
 ;;(use-package! 'ucs-normalize
 ;;  :before org-roam)
 ;; (use-package! websocket
-    ;; :after org-roam)
+;; :after org-roam)
 (use-package! org-roam-ui
-    :after org-roam ;; or :after org
-        ;; normally we'd recommend hooking orui after org-roam, but since org-roam does not have
-        ;; a hookable mode anymore, you're advised to pick something yourself
-        ;; if you don't care about startup time, use
- :hook (after-init . org-roam-ui-mode)
-    :config
-    (setq org-roam-ui-sync-theme t
-          org-roam-ui-follow t
-          org-roam-ui-update-on-save t
-          org-roam-ui-open-on-start t))
+  :after org-roam ;; or :after org
+  ;; normally we'd recommend hooking orui after org-roam, but since org-roam does not have
+  ;; a hookable mode anymore, you're advised to pick something yourself
+  ;; if you don't care about startup time, use
+  :hook (after-init . org-roam-ui-mode)
+  :config
+  (setq org-roam-ui-sync-theme t
+        org-roam-ui-follow t
+        org-roam-ui-update-on-save t
+        org-roam-ui-open-on-start t))
 
 (require 'ucs-normalize)
 
@@ -94,15 +94,9 @@
             t))
 
 (setq lsp-clients-clangd-args
-    '("--header-insertion=never"))
-;; (add-hook 'c-mode-hook (lambda () (clang-format-save-hook-for-this-buffer)))
+      '("--header-insertion=never"))
+(add-hook 'c-mode-hook (lambda () (clang-format-save-hook-for-this-buffer)))
 (add-hook 'c++-mode-hook (lambda () (clang-format-save-hook-for-this-buffer)))
-;; (add-hook 'glsl-mode-hook (lambda () (clang-format-save-hook-for-this-buffer)))
-
-;; tree sitter for emacs28
-;; (use-package! tree-sitter)
-;; (require 'tree-sitter-langs)
-;; (global-tree-sitter-mode)
+(add-hook 'glsl-mode-hook (lambda () (clang-format-save-hook-for-this-buffer)))
 
 (provide 'config)
-;;;
