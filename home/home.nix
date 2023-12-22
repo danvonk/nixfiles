@@ -1,4 +1,13 @@
-{ inputs, config, pkgs, lib, ... }: {
+{ inputs, config, pkgs, lib, ... }:
+
+let
+  doomEmacsDesktop = pkgs.makeDesktopItem {
+    name = "DOOM Emacs";
+    desktopName = "DOOM Emacs";
+    exec = "~/.config/emacs/bin/doom run -- %u";
+    terminal = false;
+  };
+in {
   imports = [ ./git.nix ];
 
   home = {
@@ -11,11 +20,6 @@
   programs.home-manager.enable = true;
 
   fonts.fontconfig.enable = true;
-  # dconf.settings = {
-  #   "org/gnome/mutter" = {
-  #     experimental-features = [ "scale-monitor-framebuffer" ];
-  #   };
-  # };
 
   nixpkgs.config = {
     allowUnfree = true;
@@ -113,6 +117,14 @@
   services.syncthing = {
     enable = true;
     tray.enable = true;
+  };
+
+  # xdg.desktopEntries.emacs = doomEmacsDesktop;
+  xdg.desktopEntries.meme = pkgs.makeDesktopItem {
+    name = "DOOM Emacs";
+    desktopName = "DOOM Emacs";
+    exec = "~/.config/emacs/bin/doom run -- %u";
+    terminal = false;
   };
 
   home.file.".config/doom".source = ./doom.d;
