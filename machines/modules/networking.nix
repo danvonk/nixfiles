@@ -22,7 +22,7 @@ in {
     # using the "option" above.
     # You also set options here for modules that you imported in "imports".
 
-    networking.hostname = hostname;
+    networking.hostName = cfg.hostname;
     networking.domain = "local";
     networking.networkmanager.enable = true;
     # Configure network proxy if necessary
