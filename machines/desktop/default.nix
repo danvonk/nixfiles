@@ -10,6 +10,8 @@
     ../nix.nix
     ../modules/locale.nix
     ../modules/nvidia.nix
+    ../modules/user.nix
+    ../modules/networking.nix
   ];
 
   # Custom module toggles
@@ -21,11 +23,10 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.hostName = "desktop";
-  networking.domain = "local";
-
-  # Enable networking
-  networking.networkmanager.enable = true;
+  modules.networking = {
+    enable = true;
+    hostname = "desktop";
+  };
 
   # Enable the X11 windowing system.
   services.xserver = {
