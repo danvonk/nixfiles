@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=DOOM Emacs
+Name=DOOM
+Exec=~/.config/emacs/bin/doom run -- %u
+Icon=emacs
+Terminal=false
+Categories=Utility

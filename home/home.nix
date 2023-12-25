@@ -1,13 +1,6 @@
 { inputs, config, pkgs, lib, ... }:
 
-let
-  doomEmacsDesktop = pkgs.makeDesktopItem {
-    name = "DOOM Emacs";
-    desktopName = "DOOM Emacs";
-    exec = "~/.config/emacs/bin/doom run -- %u";
-    terminal = false;
-  };
-in {
+{
   imports = [ ./git.nix ];
 
   home = {
@@ -60,6 +53,7 @@ in {
     ripgrep
     # shell gizmos
     fzf
+    neofetch
   ];
 
   home.sessionVariables = {
@@ -68,11 +62,10 @@ in {
   };
 
   home.shellAliases = {
-    nupdate =
-      "cd ~/nixfiles && sudo nixos-rebuild switch --upgrade --flake && cd -";
+    nupdate = "cd ~/nixfiles && sudo nixos-rebuild switch --upgrade --flake";
     hupdate =
       "cd ~/nixfiles && home-manager switch --flake .#dan@desktop && cd -";
-    ec = "emacsclient -nw";
+    ec = "~/.config/emacs/bin/doom run -nw";
   };
 
   programs.zsh = {
@@ -119,13 +112,8 @@ in {
     tray.enable = true;
   };
 
-  # xdg.desktopEntries.emacs = doomEmacsDesktop;
-  xdg.desktopEntries.meme = pkgs.makeDesktopItem {
-    name = "DOOM Emacs";
-    desktopName = "DOOM Emacs";
-    exec = "~/.config/emacs/bin/doom run -- %u";
-    terminal = false;
-  };
+  home.file.".local/share/applications/doom.desktop".source =
+    ./dotfiles/doom.desktop;
 
   home.file.".config/doom".source = ./doom.d;
 
