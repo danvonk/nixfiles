@@ -54,6 +54,7 @@
     # shell gizmos
     fzf
     neofetch
+    nodejs
   ];
 
   home.sessionVariables = {
