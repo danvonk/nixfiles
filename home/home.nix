@@ -16,7 +16,8 @@
 
   nixpkgs.config = {
     allowUnfree = true;
-    allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [ "vscode" ];
+    allowUnfreePredicate = pkg:
+      builtins.elem (lib.getName pkg) [ "vscode" "zoom" ];
   };
 
   home.packages = with pkgs; [
@@ -45,10 +46,12 @@
     # isabelle
     gdb
     vscode
+    zoom-us
     ghc # having ghci in shell is useful
     chromium
     gnome.pomodoro
     sqlite
+    anki-bin
     # emacs
     ripgrep
     # shell gizmos
