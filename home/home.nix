@@ -34,6 +34,8 @@
     ispell
     hunspell
     hunspellDicts.en-gb-large
+    hunspellDicts.fr-moderne
+    hunspellDicts.de_DE
     pavucontrol
     syncthing
     direnv
@@ -52,7 +54,6 @@
     gnome.pomodoro
     sqlite
     anki-bin
-    # emacs
     ripgrep
     # shell gizmos
     fzf
