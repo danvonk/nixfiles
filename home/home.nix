@@ -45,6 +45,8 @@
     libreoffice-qt
     foliate
     texlive.combined.scheme-full
+    typst
+    typst-lsp
     # isabelle
     gdb
     vscode
@@ -55,10 +57,14 @@
     sqlite
     anki-bin
     ripgrep
+    nextcloud-client
     # shell gizmos
     fzf
     neofetch
     nodejs
+    docker-compose
+    gthumb
+    linuxPackages_latest.perf
   ];
 
   home.sessionVariables = {
