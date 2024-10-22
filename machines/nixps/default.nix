@@ -11,6 +11,7 @@
     ../modules/nvidia.nix
     ../modules/locale.nix
     ../modules/networking.nix
+    ../modules/user.nix
   ];
 
   # Custom module toggles

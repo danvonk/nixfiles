@@ -19,7 +19,11 @@ in {
     # You also set options here for modules that you imported in "imports".
     # NVIDIA drivers are unfree.
     nixpkgs.config.allowUnfreePredicate = pkg:
-      builtins.elem (lib.getName pkg) [ "nvidia-x11" "nvidia-settings" ];
+      builtins.elem (lib.getName pkg) [
+        "nvidia-x11"
+        "nvidia-settings"
+        "nvidia-persistenced"
+      ];
 
     # Tell Xorg to use the nvidia driver
     services.xserver.videoDrivers = [ "nvidia" ];
@@ -32,11 +36,11 @@ in {
       # Enable the nvidia settings menu
       nvidiaSettings = true;
 
-      powerManagement.enable = true;
+      powerManagement.enable = false;
       powerManagement.finegrained = false;
 
       # Optionally, you may need to select the appropriate driver version for your specific GPU.
-      package = config.boot.kernelPackages.nvidiaPackages.stable;
+      package = config.boot.kernelPackages.nvidiaPackages.beta;
     };
 
     hardware.opengl = {
