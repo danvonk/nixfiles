@@ -28,6 +28,7 @@ in {
     # Tell Xorg to use the nvidia driver
     services.xserver.videoDrivers = [ "nvidia" ];
 
+    hardware.nvidia-container-toolkit.enable = true;
     hardware.nvidia = {
       # Modesetting is needed for most wayland compositors
       modesetting.enable = true;

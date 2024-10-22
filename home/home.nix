@@ -27,7 +27,6 @@
     firefox
     thunderbird
     rofi
-    # kitty
     jetbrains-mono
     noto-fonts
     newcomputermodern
@@ -48,7 +47,6 @@
     texlive.combined.scheme-full
     typst
     typst-lsp
-    # isabelle
     gdb
     vscode
     zoom-us
@@ -122,9 +120,9 @@
   programs.neovim = {
     enable = true;
     defaultEditor = false;
-    plugins = [
-      pkgs.vimPlugins.nvim-treesitter
-      pkgs.vimPlugins.nvim-treesitter.withAllGrammars
+    plugins = with pkgs.vimPlugins; [
+      nvim-treesitter
+      nvim-treesitter.withAllGrammars
     ];
   };
 
@@ -135,9 +133,7 @@
 
   home.file.".local/share/applications/doom.desktop".source =
     ./dotfiles/doom.desktop;
-
   home.file.".config/doom".source = ./doom.d;
-
   home.file.".config/kitty/kitty.conf".source =
     config.lib.file.mkOutOfStoreSymlink ./dotfiles/kitty/kitty.conf;
   home.file.".config/i3/config".source =

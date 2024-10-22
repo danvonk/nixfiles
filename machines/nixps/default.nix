@@ -42,30 +42,31 @@
   };
 
   # Enable the GNOME Desktop Environment.
+  services.libinput = {
+    enable = true;
+    touchpad.tapping = true;
+    touchpad.naturalScrolling = false;
+    touchpad.scrollMethod = "twofinger";
+    touchpad.disableWhileTyping = false;
+    touchpad.clickMethod = "clickfinger";
+  };
+
+  services.displayManager = { defaultSession = "gnome"; };
+
   services.xserver = {
     enable = true;
     exportConfiguration = true;
     synaptics.enable = false;
-    libinput = {
-      enable = true;
-      touchpad.tapping = true;
-      touchpad.naturalScrolling = false;
-      touchpad.scrollMethod = "twofinger";
-      touchpad.disableWhileTyping = false;
-      touchpad.clickMethod = "clickfinger";
-    };
     desktopManager = {
       xfce = {
-        enable = true;
+        enable = false;
         noDesktop = true;
         enableXfwm = false;
       };
       gnome.enable = true;
     };
-    displayManager = {
-      defaultSession = "gnome";
-      gdm.enable = true;
-    };
+
+    displayManager = { gdm.enable = true; };
     windowManager.i3.enable = true;
   };
 
@@ -115,12 +116,7 @@
   };
 
   services.tailscale.enable = true;
-  virtualisation = {
-    docker = {
-      enable = true;
-      enableNvidia = true;
-    };
-  };
+  virtualisation.docker.enable = true;
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.

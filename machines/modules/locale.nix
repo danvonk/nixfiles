@@ -33,9 +33,9 @@ in {
     # Configure console keymap
     console.keyMap = "uk";
 
-    services.xserver = {
+    services.xserver.xkb = {
       layout = "gb";
-      xkbVariant = "";
+      variant = "";
     };
 
     # Option definitions.

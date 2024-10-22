@@ -10,7 +10,7 @@ in {
   options.modules.networking = {
     enable = mkEnableOption "Enable networking stuff like avahi";
     hostname = mkOption {
-      type = types.string;
+      type = types.str;
       default = "nixos";
     };
   };
@@ -31,7 +31,7 @@ in {
 
     services.avahi = {
       enable = true;
-      nssmdns = true;
+      nssmdns4 = true;
       publish = {
         enable = true;
         addresses = true;
