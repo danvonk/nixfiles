@@ -17,7 +17,7 @@
   nixpkgs.config = {
     allowUnfree = true;
     allowUnfreePredicate = pkg:
-      builtins.elem (lib.getName pkg) [ "vscode" "zoom" ];
+      builtins.elem (lib.getName pkg) [ "vscode" "zoom" "netflix" ];
   };
 
   home.packages = with pkgs; [
@@ -30,6 +30,7 @@
     # kitty
     jetbrains-mono
     noto-fonts
+    newcomputermodern
     xfce.xfce4-whiskermenu-plugin
     ispell
     hunspell
@@ -40,7 +41,7 @@
     syncthing
     direnv
     nix-direnv
-    nixfmt
+    nixfmt-classic
     ripgrep
     libreoffice-qt
     foliate
@@ -65,6 +66,15 @@
     docker-compose
     gthumb
     linuxPackages_latest.perf
+    hotspot
+    vlc
+    testdisk
+    gcc # annoyingly for emacs
+    zotero
+    inkscape
+    gimp
+    netflix
+    rstudio
   ];
 
   home.sessionVariables = {
@@ -82,7 +92,7 @@
   programs.zsh = {
     enable = true;
     syntaxHighlighting.enable = true;
-    enableAutosuggestions = true;
+    autosuggestion.enable = true;
     enableCompletion = true;
     enableVteIntegration = true;
     prezto = {
