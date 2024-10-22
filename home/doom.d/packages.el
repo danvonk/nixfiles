@@ -58,3 +58,5 @@
 (package! tree-sitter-langs)
 (package! copilot
   :recipe (:host github :repo "zerolfx/copilot.el" :files ("*.el" "dist")))
+(package! typst-ts-mode
+  :recipe (:type git :host sourcehut :repo "meow_king/typst-ts-mode"))

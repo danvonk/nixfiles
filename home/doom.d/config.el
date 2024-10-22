@@ -27,7 +27,7 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'doom-one)
+(setq doom-theme 'doom-oksolar-light)
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
@@ -74,7 +74,14 @@
 
 (require 'ucs-normalize)
 
+
+;; Org Mode Stuff
+(defun org-line-nums ()
+  "Disable line numbers in org mode."
+  (display-line-numbers-mode 0))
+
 (add-hook 'org-mode-hook 'variable-pitch-mode)
+(add-hook 'org-mode-hook 'org-line-nums)
 
 (add-hook 'LaTeX-mode-hook
           (lambda ()
@@ -121,4 +128,33 @@
   ;; Bind the custom function to <tab> in Evil's insert state
   (evil-define-key 'insert 'global (kbd "<tab>") 'my/copilot-tab-or-default))
 
+(add-to-list 'treesit-language-source-alist
+             '(typst "https://github.com/uben0/tree-sitter-typst"))
+(treesit-install-language-grammar 'typst)
+
+;; (use-package! typst-ts-mode
+;;   :config (
+;;   ;; don't add "--open" if you'd like `watch` to be an error detector
+;;   (typst-ts-mode-watch-options "--open")
+
+;;   ;; experimental settings (I'm the main dev, so I enable these)
+;;   (typst-ts-mode-enable-raw-blocks-highlight t)
+;;   (typst-ts-mode-highlight-raw-blocks-at-startup t)))
+
+
 (provide 'config)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
