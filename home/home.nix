@@ -20,60 +20,66 @@
       builtins.elem (lib.getName pkg) [ "vscode" "zoom" "netflix" ];
   };
 
-  home.packages = with pkgs; [
-    vim
-    git
-    htop
-    firefox
-    thunderbird
-    rofi
-    jetbrains-mono
-    noto-fonts
-    newcomputermodern
-    xfce.xfce4-whiskermenu-plugin
-    ispell
-    hunspell
-    hunspellDicts.en-gb-large
-    hunspellDicts.fr-moderne
-    hunspellDicts.de_DE
-    pavucontrol
-    syncthing
-    direnv
-    nix-direnv
-    nixfmt-classic
-    ripgrep
-    libreoffice-qt
-    foliate
-    texlive.combined.scheme-full
-    typst
-    typst-lsp
-    gdb
-    vscode
-    zoom-us
-    ghc # having ghci in shell is useful
-    chromium
-    gnome.pomodoro
-    sqlite
-    anki-bin
-    ripgrep
-    nextcloud-client
-    # shell gizmos
-    fzf
-    neofetch
-    nodejs
-    docker-compose
-    gthumb
-    linuxPackages_latest.perf
-    hotspot
-    vlc
-    testdisk
-    gcc # annoyingly for emacs
-    zotero
-    inkscape
-    gimp
-    netflix
-    rstudio
-  ];
+  home.packages = with pkgs;
+    let
+      my-rstudio = rstudioWrapper.override {
+        packages = with rPackages; [ ggplot2 dplyr xts dslabs ];
+      };
+    in [
+      vim
+      git
+      htop
+      firefox
+      thunderbird
+      rofi
+      jetbrains-mono
+      noto-fonts
+      newcomputermodern
+      xfce.xfce4-whiskermenu-plugin
+      ispell
+      hunspell
+      hunspellDicts.en-gb-large
+      hunspellDicts.fr-moderne
+      hunspellDicts.de_DE
+      pavucontrol
+      syncthing
+      direnv
+      nix-direnv
+      nixfmt-classic
+      ripgrep
+      libreoffice-qt
+      foliate
+      texlive.combined.scheme-full
+      typst
+      typst-lsp
+      gdb
+      vscode
+      zoom-us
+      ghc # having ghci in shell is useful
+      chromium
+      gnome.pomodoro
+      sqlite
+      anki-bin
+      ripgrep
+      nextcloud-client
+      # shell gizmos
+      fzf
+      neofetch
+      nodejs
+      docker-compose
+      gthumb
+      linuxPackages_latest.perf
+      hotspot
+      vlc
+      testdisk
+      gcc # annoyingly for emacs
+      zotero
+      inkscape
+      gimp
+      netflix
+      my-rstudio
+      paraview
+    ];
 
   home.sessionVariables = {
     EDITOR = "emacsclient -nw";
@@ -115,15 +121,6 @@
     nix-direnv.enable = true;
     enableZshIntegration = true;
     enableBashIntegration = true;
-  };
-
-  programs.neovim = {
-    enable = true;
-    defaultEditor = false;
-    plugins = with pkgs.vimPlugins; [
-      nvim-treesitter
-      nvim-treesitter.withAllGrammars
-    ];
   };
 
   services.syncthing = {

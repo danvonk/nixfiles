@@ -51,23 +51,14 @@
     touchpad.clickMethod = "clickfinger";
   };
 
-  services.displayManager = { defaultSession = "gnome"; };
+  services.displayManager.defaultSession = "gnome";
 
   services.xserver = {
     enable = true;
     exportConfiguration = true;
     synaptics.enable = false;
-    desktopManager = {
-      xfce = {
-        enable = false;
-        noDesktop = true;
-        enableXfwm = false;
-      };
-      gnome.enable = true;
-    };
-
-    displayManager = { gdm.enable = true; };
-    windowManager.i3.enable = true;
+    desktopManager.gnome.enable = true;
+    displayManager.gdm.enable = true;
   };
 
   # Enable CUPS to print documents.
@@ -106,16 +97,15 @@
     gnomeExtensions.pop-launcher-super-key
   ];
 
-  services.udev.packages = with pkgs; [ gnome.gnome-settings-daemon ];
-
   programs.zsh.enable = true;
 
   services = {
     flatpak.enable = true;
     dbus.enable = true;
+    tailscale.enable = true;
+    udev.packages = with pkgs; [ gnome.gnome-settings-daemon ];
   };
 
-  services.tailscale.enable = true;
   virtualisation.docker.enable = true;
 
   # Some programs need SUID wrappers, can be configured further or are
