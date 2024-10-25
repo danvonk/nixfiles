@@ -51,15 +51,34 @@
     touchpad.clickMethod = "clickfinger";
   };
 
-  services.displayManager.defaultSession = "gnome";
+  #services.displayManager.defaultSession = "gnome";
 
   services.xserver = {
     enable = true;
     exportConfiguration = true;
     synaptics.enable = false;
-    desktopManager.gnome.enable = true;
-    displayManager.gdm.enable = true;
+    #desktopManager.gnome.enable = true;
+    #displayManager.gdm.enable = true;
+    displayManager.sddm.enable = true;
+    desktopManager.plasma6.enable = true;
+
   };
+
+  environment.plasma6.excludePackages = with pkgs.kdePackages; [
+    plasma-browser-integration
+    konsole
+    kate
+    dolphin
+    elisa
+    okular
+  ];
+  services.accounts-daemon.enable = true;
+  services.gnome.gnome-online-accounts.enable = true;
+  programs.dconf.enable = true;
+  services.gnome.evolution-data-server.enable = true;
+  # optional to use google/nextcloud calendar
+  # optional to use google/nextcloud calendar
+  services.gnome.gnome-keyring.enable = true;
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
@@ -95,6 +114,13 @@
     gnomeExtensions.appindicator
     gnomeExtensions.pop-shell
     gnomeExtensions.pop-launcher-super-key
+    gnome.gnome-terminal
+    gnome.gnome-calendar
+    gnome-online-accounts
+    gnome-online-accounts-gtk
+    gnome.gnome-control-center
+    gnome.nautilus
+    evince
   ];
 
   programs.zsh.enable = true;
