@@ -34,6 +34,7 @@
     loader.systemd-boot.enable = true;
     loader.efi.canTouchEfiVariables = true;
     kernelParams = [ "psmouse.synaptics_intertouch=0" ];
+    kernel.sysctl."kernel.perf_event_paranoid" = -1;
   };
 
   modules.networking = {
@@ -41,7 +42,6 @@
     hostname = "nixps";
   };
 
-  # Enable the GNOME Desktop Environment.
   services.libinput = {
     enable = true;
     touchpad.tapping = true;
@@ -59,10 +59,10 @@
     synaptics.enable = false;
     #desktopManager.gnome.enable = true;
     #displayManager.gdm.enable = true;
-    displayManager.sddm.enable = true;
-    desktopManager.plasma6.enable = true;
-
   };
+
+  services.desktopManager = { plasma6.enable = true; };
+  services.displayManager.sddm.enable = true;
 
   environment.plasma6.excludePackages = with pkgs.kdePackages; [
     plasma-browser-integration
@@ -76,8 +76,6 @@
   services.gnome.gnome-online-accounts.enable = true;
   programs.dconf.enable = true;
   services.gnome.evolution-data-server.enable = true;
-  # optional to use google/nextcloud calendar
-  # optional to use google/nextcloud calendar
   services.gnome.gnome-keyring.enable = true;
 
   # Enable CUPS to print documents.
@@ -121,6 +119,8 @@
     gnome.gnome-control-center
     gnome.nautilus
     evince
+    openvpn
+    networkmanager-openvpn
   ];
 
   programs.zsh.enable = true;
