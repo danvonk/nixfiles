@@ -54,6 +54,8 @@
       typst-lsp
       gdb
       vscode
+      vscode-extensions.rust-lang.rust-analyzer
+      rust-analyzer
       zoom-us
       ghc # having ghci in shell is useful
       chromium
@@ -62,6 +64,7 @@
       anki-bin
       ripgrep
       nextcloud-client
+      calibre
       # shell gizmos
       fzf
       neofetch
@@ -79,6 +82,8 @@
       netflix
       my-rstudio
       paraview
+      rclone
+      rclone-browser
     ];
 
   home.sessionVariables = {
@@ -105,7 +110,8 @@
     };
     oh-my-zsh = {
       enable = true;
-      plugins = [ "git" "fzf" "sudo" "docker" "pyenv" "python" "ripgrep" ];
+      plugins =
+        [ "git" "fzf" "sudo" "docker" "pyenv" "python" "ripgrep" "vi-mode" ];
       theme = "robbyrussell";
     };
   };
