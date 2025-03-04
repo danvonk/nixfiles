@@ -20,71 +20,70 @@
       builtins.elem (lib.getName pkg) [ "vscode" "zoom" "netflix" ];
   };
 
-  home.packages = with pkgs;
-    let
-      my-rstudio = rstudioWrapper.override {
-        packages = with rPackages; [ ggplot2 dplyr xts dslabs ];
-      };
-    in [
-      vim
-      git
-      htop
-      firefox
-      thunderbird
-      rofi
-      jetbrains-mono
-      noto-fonts
-      newcomputermodern
-      xfce.xfce4-whiskermenu-plugin
-      ispell
-      hunspell
-      hunspellDicts.en-gb-large
-      hunspellDicts.fr-moderne
-      hunspellDicts.de_DE
-      pavucontrol
-      syncthing
-      direnv
-      nix-direnv
-      nixfmt-classic
-      ripgrep
-      libreoffice-qt
-      foliate
-      texlive.combined.scheme-full
-      typst
-      typst-lsp
-      gdb
-      vscode
-      vscode-extensions.rust-lang.rust-analyzer
-      rust-analyzer
-      zoom-us
-      ghc # having ghci in shell is useful
-      chromium
-      gnome.pomodoro
-      sqlite
-      anki-bin
-      ripgrep
-      nextcloud-client
-      calibre
-      # shell gizmos
-      fzf
-      neofetch
-      nodejs
-      docker-compose
-      gthumb
-      linuxPackages_latest.perf
-      hotspot
-      vlc
-      testdisk
-      gcc # annoyingly for emacs
-      zotero
-      inkscape
-      gimp
-      netflix
-      my-rstudio
-      paraview
-      rclone
-      rclone-browser
-    ];
+  my-rstudio = import ./rlang.nix { inherit pkgs; };
+
+  home.packages = with pkgs; [
+    vim
+    git
+    htop
+    firefox
+    thunderbird
+    rofi
+    jetbrains-mono
+    noto-fonts
+    newcomputermodern
+    ispell
+    hunspell
+    hunspellDicts.en-gb-large
+    hunspellDicts.fr-moderne
+    hunspellDicts.de_DE
+    pavucontrol
+    syncthing
+    direnv
+    nix-direnv
+    nixfmt-classic
+    ripgrep
+    libreoffice-qt
+    foliate
+    texlive.combined.scheme-full
+    typst
+    typst-lsp
+    gdb
+    vscode
+    vscode-extensions.rust-lang.rust-analyzer
+    rust-analyzer
+    zoom-us
+    chromium
+    gnome-pomodoro
+    sqlite
+    anki-bin
+    ripgrep
+    nextcloud-client
+    calibre
+    # shell gizmos
+    fzf
+    neofetch
+    nodejs
+    docker-compose
+    gthumb
+    linuxPackages_latest.perf
+    hotspot
+    vlc
+    testdisk
+    gcc # annoyingly for emacs
+    zotero
+    inkscape
+    gimp
+    my-rstudio
+    paraview
+    rclone
+    rclone-browser
+    azure-cli
+    protonmail-bridge
+    protonmail-bridge-gui
+    protonvpn-gui
+    protonmail-desktop
+  ];
 
   home.sessionVariables = {
     EDITOR = "emacsclient -nw";
@@ -132,6 +131,14 @@
   services.syncthing = {
     enable = true;
     tray.enable = true;
+  };
+
+  gtk = {
+    enable = true;
+    theme = {
+      name = "Arc";
+      package = pkgs.arc-theme;
+    };
   };
 
   home.file.".local/share/applications/doom.desktop".source =
