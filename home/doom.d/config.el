@@ -27,7 +27,7 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'doom-oksolar-light)
+(setq doom-theme 'dichromacy)
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
@@ -128,9 +128,9 @@
   ;; Bind the custom function to <tab> in Evil's insert state
   (evil-define-key 'insert 'global (kbd "<tab>") 'my/copilot-tab-or-default))
 
-(add-to-list 'treesit-language-source-alist
-             '(typst "https://github.com/uben0/tree-sitter-typst"))
-(treesit-install-language-grammar 'typst)
+;; (add-to-list 'treesit-language-source-alist
+;;              '(typst "https://github.com/uben0/tree-sitter-typst"))
+;; (treesit-install-language-grammar 'typst)
 
 ;; (use-package! typst-ts-mode
 ;;   :config (
