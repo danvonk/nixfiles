@@ -1,6 +1,7 @@
 { inputs, config, pkgs, lib, ... }:
 
-{
+let my-rstudio = import ./rlang.nix { inherit pkgs; };
+in {
   imports = [ ./git.nix ];
 
   home = {
@@ -19,8 +20,6 @@
     allowUnfreePredicate = pkg:
       builtins.elem (lib.getName pkg) [ "vscode" "zoom" "netflix" ];
   };
-
-  my-rstudio = import ./rlang.nix { inherit pkgs; };
 
   home.packages = with pkgs; [
     vim
@@ -74,7 +73,6 @@
     zotero
     inkscape
     gimp
-    my-rstudio
     paraview
     rclone
     rclone-browser
@@ -83,6 +81,7 @@
     protonmail-bridge-gui
     protonvpn-gui
     protonmail-desktop
+    my-rstudio
   ];
 
   home.sessionVariables = {

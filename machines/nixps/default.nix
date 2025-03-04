@@ -51,27 +51,27 @@
     touchpad.clickMethod = "clickfinger";
   };
 
-  #services.displayManager.defaultSession = "gnome";
+  services.displayManager.defaultSession = "gnome";
 
   services.xserver = {
     enable = true;
     exportConfiguration = true;
     synaptics.enable = false;
-    #desktopManager.gnome.enable = true;
-    #displayManager.gdm.enable = true;
+    desktopManager.gnome.enable = true;
+    displayManager.gdm.enable = true;
   };
 
-  services.desktopManager = { plasma6.enable = true; };
-  services.displayManager.sddm.enable = true;
+  # services.desktopManager = { plasma6.enable = true; };
+  # services.displayManager.sddm.enable = true;
 
-  environment.plasma6.excludePackages = with pkgs.kdePackages; [
-    plasma-browser-integration
-    konsole
-    kate
-    dolphin
-    elisa
-    okular
-  ];
+  # environment.plasma6.excludePackages = with pkgs.kdePackages; [
+  #   plasma-browser-integration
+  #   konsole
+  #   kate
+  #   dolphin
+  #   elisa
+  #   okular
+  # ];
   services.accounts-daemon.enable = true;
   services.gnome.gnome-online-accounts.enable = true;
   programs.dconf.enable = true;
@@ -82,7 +82,6 @@
   services.printing.enable = true;
 
   # Enable sound with pipewire.
-  sound.enable = true;
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
@@ -110,8 +109,8 @@
     xdg-utils
     cachix
     gnomeExtensions.appindicator
-    gnomeExtensions.pop-shell
-    gnomeExtensions.pop-launcher-super-key
+    # gnomeExtensions.pop-shell
+    # gnomeExtensions.pop-launcher-super-key
     gnome.gnome-terminal
     gnome.gnome-calendar
     gnome-online-accounts
